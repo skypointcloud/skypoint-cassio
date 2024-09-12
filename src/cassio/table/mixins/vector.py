@@ -113,6 +113,10 @@ class VectorMixin(BaseTableMixin):
         else:
             where_clause = "WHERE " + " AND ".join(all_where_clauses)
         #
+        #Check if there is more than one file in where_cql_vals, change where condition accordingly to consider multiple files
+        if len(where_cql_vals) == 1 and "*|*" in where_cql_vals[0]:
+            where_cql_vals = tuple(where_cql_vals[0].split("*|*"))
+            where_clause = 'WHERE ' + ' OR '.join(where_clause.replace('WHERE ', '') for _ in range(len(where_cql_vals)))                           
         limit_clause = "LIMIT %s"
         limit_cql_vals = (n,)
         #
