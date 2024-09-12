@@ -4,6 +4,7 @@
 .env
 .testing.env
 env
+.venv
 
 ### (abridged) BOILERPLATE STARTS HERE
 
